@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <title>Send Data</title>
+    <style>
+      html {
+        font-family: "Lato", sans-serif;
+      }
+    </style>
+    <script>
+      function post() {
+        const value = document.getElementById("value").value;
+        const type = document.getElementById("type").value;
+        const unit = document.getElementById("units").value;
+        const time = document.getElementById("time").value;
+        const place = document.getElementById("citiesList").value;
+        // console.log(value + type + unit + time + place);
+
+        fetch("http://localhost:8080/data", {
+          method: "POST",
+          body: JSON.stringify({
+            value: value,
+            type: type,
+            unit: unit,
+            time: time,
+            place: place,
+          }),
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        }).then((res) => {
+          if (res.ok) return res;
+          else return Promise.reject(res.statusText);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="window.location='index.html';">Go to main page</button>
+    <form>
+      <label>Value</label><br />
+      <input type="number" id="value" placeholder="Value" required /><br />
+
+      <label>Type</label><br />
+      <select name="list" id="type">
+        <option value="temperature">temperature</option>
+        <option value="precipitation">precipitation</option>
+        <option value="wind speed">wind speed</option>
+        <option value="cloud coverage">cloud coverage</option></select
+      ><br />
+
+      <label>Unit</label><br />
+      <select name="list" id="units">
+        <option value="c">C</option>
+        <option value="mm">mm</option>
+        <option value="m/s">m/s</option>
+        <option value="%">%</option></select
+      ><br />
+
+      <label>Time</label><br />
+      <input
+        type="datetime-local"
+        id="time"
+        placeholder="Time"
+        required
+      /><br />
+
+      <label>Place</label><br />
+      <select name="list" id="citiesList">
+        <option value="Horsens">Horsens</option>
+        <option value="Aarhus">Aarhus</option>
+        <option value="Copenhagen">Copenhagen</option>
+      </select>
+      <button type="submit" onclick="post()">Submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <title>Assignment 1 - Fetch Requests</title>
+    <script src="FetchRequests.js"></script>
+    <script src="tools.js"></script>
+    <script src="model.js"></script>
+    <style>
+      html {
+        font-family: "Lato", sans-serif;
+      }
+      td {
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+      }
+      table {
+        border: 1px solid black;
+        border-spacing: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="window.location='index.html';">Go to main page</button>
+    <h1>Fetch Requests</h1>
+    <form name="cities">
+      <select name="list" id="citiesList" onchange="cleanTextInput()">
+        <option value="Horsens">Horsens</option>
+        <option value="Aarhus">Aarhus</option>
+        <option value="Copenhagen">Copenhagen</option>
+      </select>
+    </form>
+
+    <button
+      id="btn"
+      onclick="fetchGetForecast(document.getElementById('citiesList').value)"
+    >
+      Get hourly forecast for the next 24h
+    </button>
+    <button
+      id="btn"
+      onclick="fetchGetMinTemperature(document.getElementById('citiesList').value)"
+    >
+      Get minimal temperature for selected city
+    </button>
+    <button
+      id="btn"
+      onclick="fetchGetMaxTemperature(document.getElementById('citiesList').value)"
+    >
+      Get maximal temperature for selected city
+    </button>
+
+    <button
+      id="btn"
+      onclick="fetchGetAverageWindSpeed(document.getElementById('citiesList').value)"
+    >
+      Get average wind speed
+    </button>
+
+    <button
+      id="btn"
+      onclick="fetchGetTotalprecipitation(document.getElementById('citiesList').value)"
+    >
+      Get total precipitation
+    </button>
+
+    <button
+      id="btn"
+      onclick="fetchGetLatestMeasurementOfEachKind(document.getElementById('citiesList').value)"
+    >
+      Get latest measurement
+    </button>
+
+    <div id="content">
+      Choose the city and click on one of the buttons to display the data
+    </div>
+  </body>
+</html>
